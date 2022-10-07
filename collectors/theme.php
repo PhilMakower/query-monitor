@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /**
  * Template and theme collector.
  *
@@ -44,7 +44,7 @@ class QM_Collector_Theme extends QM_DataCollector {
 	 */
 	protected $requested_template_part_nopes = array();
 
-	public function get_storage() {
+	public function get_storage(): QM_Data {
 		return new QM_Data_Theme();
 	}
 
@@ -467,7 +467,7 @@ class QM_Collector_Theme extends QM_DataCollector {
 			$all = array_merge( $posts, $files, $nopes );
 
 			foreach ( $all as $part ) {
-				$file = isset( $part['path'] ) ? $part['path'] : $part['post'];
+				$file = $part['path'] ?? $part['post'];
 
 				if ( isset( $this->data->count_template_parts[ $file ] ) ) {
 					$this->data->count_template_parts[ $file ]++;

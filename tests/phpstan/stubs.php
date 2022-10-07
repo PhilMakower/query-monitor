@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 // QM constants:
 
@@ -41,21 +41,3 @@ class_alias(
 	'\\Codeception\\Test\\Unit',
 	'\\tad\\WPBrowser\\Compat\\Codeception\\Unit'
 );
-
-// Compat functions:
-
-/**
- * @return string
- */
-function mysql_get_client_info() {}
-
-/**
- * @return int
- */
-function mysql_errno( $link_identifier = null ) {}
-
-/**
- * @param resource $link_identifier
- * @return string|false
- */
-function mysql_get_server_info( $link_identifier = null ) {}

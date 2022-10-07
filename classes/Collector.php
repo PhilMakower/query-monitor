@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /**
  * Abstract data collector.
  *
@@ -105,8 +105,7 @@ abstract class QM_Collector {
 	 * @return float
 	 */
 	public static function timer_stop_float() {
-		global $timestart;
-		return microtime( true ) - $timestart;
+		return microtime( true ) - $_SERVER['REQUEST_TIME_FLOAT'];
 	}
 
 	/**
@@ -138,7 +137,7 @@ abstract class QM_Collector {
 	/**
 	 * @return QM_Data
 	 */
-	public function get_storage() {
+	public function get_storage(): QM_Data {
 		return new QM_Data_Fallback();
 	}
 

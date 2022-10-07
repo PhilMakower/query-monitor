@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /**
  * PHP error collector.
  *
@@ -63,7 +63,7 @@ class QM_Collector_PHP_Errors extends QM_DataCollector {
 	 */
 	private static $unexpected_error = null;
 
-	public function get_storage() {
+	public function get_storage(): QM_Data {
 		return new QM_Data_PHP_Errors();
 	}
 
@@ -372,7 +372,7 @@ class QM_Collector_PHP_Errors extends QM_DataCollector {
 			$file = esc_html( $e['file'] );
 		}
 
-		$warning = QueryMonitor::init()->icon( 'warning' );
+		$warning = QueryMonitor::icon( 'warning' );
 
 		printf(
 			'<p>%1$s <b>%2$s</b>: %3$s<br>in <b>%4$s</b> on line <b>%5$d</b></p>',

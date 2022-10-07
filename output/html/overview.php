@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /**
  * General overview output for HTML pages.
  *
@@ -65,12 +65,12 @@ class QM_Output_Html_Overview extends QM_Output_Html {
 
 		echo '<section id="qm-broken">';
 		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-		echo '<p class="qm-warn">' . QueryMonitor::init()->icon( 'warning' ) . esc_html( $qm_broken ) . '</p>';
+		echo '<p class="qm-warn">' . QueryMonitor::icon( 'warning' ) . esc_html( $qm_broken ) . '</p>';
 		echo '</section>';
 
 		echo '<section id="qm-ajax-errors">';
 		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-		echo '<p class="qm-warn">' . QueryMonitor::init()->icon( 'warning' ) . esc_html( $ajax_errors ) . '</p>';
+		echo '<p class="qm-warn">' . QueryMonitor::icon( 'warning' ) . esc_html( $ajax_errors ) . '</p>';
 		echo '</section>';
 
 		if ( $raw_request ) {
@@ -110,7 +110,7 @@ class QM_Output_Html_Overview extends QM_Output_Html {
 		if ( $data->time_limit > 0 ) {
 			if ( $data->display_time_usage_warning ) {
 				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-				echo '<br><span class="qm-warn">' . QueryMonitor::init()->icon( 'warning' );
+				echo '<br><span class="qm-warn">' . QueryMonitor::icon( 'warning' );
 			} else {
 				echo '<br><span class="qm-info">';
 			}
@@ -123,7 +123,7 @@ class QM_Output_Html_Overview extends QM_Output_Html {
 			echo '</span>';
 		} else {
 			// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-			echo '<br><span class="qm-warn">' . QueryMonitor::init()->icon( 'warning' );
+			echo '<br><span class="qm-warn">' . QueryMonitor::icon( 'warning' );
 			printf(
 				/* translators: 1: Name of the PHP directive, 2: Value of the PHP directive */
 				esc_html__( 'No execution time limit. The %1$s PHP configuration directive is set to %2$s.', 'query-monitor' ),
@@ -153,7 +153,7 @@ class QM_Output_Html_Overview extends QM_Output_Html {
 				if ( $data->display_memory_usage_warning ) {
 					echo '<br><span class="qm-warn">';
 					// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-					echo QueryMonitor::init()->icon( 'warning' );
+					echo QueryMonitor::icon( 'warning' );
 					echo '</span>';
 				} else {
 					echo '<br><span class="qm-info">';
@@ -170,7 +170,7 @@ class QM_Output_Html_Overview extends QM_Output_Html {
 			if ( $data->memory_limit > 0 ) {
 				if ( $data->display_memory_usage_warning ) {
 					// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-					echo '<br><span class="qm-warn">' . QueryMonitor::init()->icon( 'warning' );
+					echo '<br><span class="qm-warn">' . QueryMonitor::icon( 'warning' );
 				} else {
 					echo '<br><span class="qm-info">';
 				}
@@ -183,7 +183,7 @@ class QM_Output_Html_Overview extends QM_Output_Html {
 				echo '</span>';
 			} else {
 				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-				echo '<br><span class="qm-warn">' . QueryMonitor::init()->icon( 'warning' );
+				echo '<br><span class="qm-warn">' . QueryMonitor::icon( 'warning' );
 				printf(
 					/* translators: 1: Name of the PHP directive, 2: Value of the PHP directive */
 					esc_html__( 'No memory limit. The %1$s PHP configuration directive is set to %2$s.', 'query-monitor' ),
@@ -197,7 +197,7 @@ class QM_Output_Html_Overview extends QM_Output_Html {
 		echo '</p>';
 		echo '</section>';
 
-		if ( isset( $db_query_num ) && isset( $db_queries_data ) ) {
+		if ( isset( $db_query_num, $db_queries_data ) ) {
 			echo '<section>';
 			echo '<h3>' . esc_html__( 'Database Queries', 'query-monitor' ) . '</h3>';
 
@@ -301,7 +301,7 @@ class QM_Output_Html_Overview extends QM_Output_Html {
 			} else {
 				echo '<p><span class="qm-warn">';
 				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-				echo QueryMonitor::init()->icon( 'warning' );
+				echo QueryMonitor::icon( 'warning' );
 				echo esc_html__( 'Persistent object cache plugin not in use', 'query-monitor' );
 				echo '</span></p>';
 
@@ -365,7 +365,7 @@ class QM_Output_Html_Overview extends QM_Output_Html {
 			} else {
 				echo '<p><span class="qm-warn">';
 				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-				echo QueryMonitor::init()->icon( 'warning' );
+				echo QueryMonitor::icon( 'warning' );
 				echo esc_html__( 'Opcode cache not in use', 'query-monitor' );
 				echo '</span></p>';
 				echo '<p>';

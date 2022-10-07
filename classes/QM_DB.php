@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /**
  * Database class used by the database dropin.
  *
@@ -81,12 +81,6 @@ class QM_DB extends wpdb {
 
 			if ( $this->dbh instanceof mysqli ) {
 				$code = mysqli_errno( $this->dbh );
-			}
-
-			if ( is_resource( $this->dbh ) ) {
-				// Please do not report this code as a PHP 7 incompatibility. Observe the surrounding logic.
-				// phpcs:ignore
-				$code = mysql_errno( $this->dbh );
 			}
 
 			$this->queries[ $i ]['result'] = new WP_Error( $code, $this->last_error );

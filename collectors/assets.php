@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /**
  * Enqueued scripts and styles collector.
  *
@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 abstract class QM_Collector_Assets extends QM_DataCollector {
 
-	public function get_storage() {
+	public function get_storage(): QM_Data {
 		return new QM_Data_Assets();
 	}
 

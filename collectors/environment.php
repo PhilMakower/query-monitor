@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /**
  * Environment data collector.
  *
@@ -31,7 +31,7 @@ class QM_Collector_Environment extends QM_DataCollector {
 		'log_errors',
 	);
 
-	public function get_storage() {
+	public function get_storage(): QM_Data {
 		return new QM_Data_Environment();
 	}
 
@@ -47,7 +47,7 @@ class QM_Collector_Environment extends QM_DataCollector {
 		# caught early before any plugins had a chance to alter them
 
 		foreach ( $this->php_vars as $setting ) {
-			if ( isset( $wpdb->qm_php_vars ) && isset( $wpdb->qm_php_vars[ $setting ] ) ) {
+			if ( isset( $wpdb->qm_php_vars, $wpdb->qm_php_vars[ $setting ] ) ) {
 				$val = $wpdb->qm_php_vars[ $setting ];
 			} else {
 				$val = ini_get( $setting );
@@ -131,13 +131,10 @@ class QM_Collector_Environment extends QM_DataCollector {
 					WHERE Variable_name IN ( '" . implode( "', '", array_keys( $mysql_vars ) ) . "' )
 				" );
 
-				/** @var mysqli|resource|false|null $dbh */
+				/** @var mysqli|false|null $dbh */
 				$dbh = $db->dbh;
 
-				if ( is_resource( $dbh ) ) {
-					# Old mysql extension
-					$extension = 'mysql';
-				} elseif ( is_object( $dbh ) ) {
+				if ( is_object( $dbh ) ) {
 					# mysqli or PDO
 					$extension = get_class( $dbh );
 				} else {
@@ -145,17 +142,7 @@ class QM_Collector_Environment extends QM_DataCollector {
 					$extension = null;
 				}
 
-				if ( isset( $db->use_mysqli ) && $db->use_mysqli ) {
-					$client = mysqli_get_client_version();
-				} else {
-					// Please do not report this code as a PHP 7 incompatibility. Observe the surrounding logic.
-					// phpcs:ignore
-					if ( preg_match( '|[0-9]{1,2}\.[0-9]{1,2}\.[0-9]{1,2}|', mysql_get_client_info(), $matches ) ) {
-						$client = $matches[0];
-					} else {
-						$client = null;
-					}
-				}
+				$client = mysqli_get_client_version();
 
 				if ( $client ) {
 					$client_version = implode( '.', QM_Util::get_client_version( $client ) );
@@ -243,11 +230,7 @@ class QM_Collector_Environment extends QM_DataCollector {
 			$server = array( '' );
 		}
 
-		if ( isset( $server[1] ) ) {
-			$server_version = $server[1];
-		} else {
-			$server_version = null;
-		}
+		$server_version = $server[1] ?? null;
 
 		if ( isset( $_SERVER['SERVER_ADDR'] ) ) {
 			$address = wp_unslash( $_SERVER['SERVER_ADDR'] );

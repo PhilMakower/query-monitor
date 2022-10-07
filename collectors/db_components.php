@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /**
  * Database query calling component collector.
  *
@@ -16,7 +16,7 @@ class QM_Collector_DB_Components extends QM_DataCollector {
 
 	public $id = 'db_components';
 
-	public function get_storage() {
+	public function get_storage(): QM_Data {
 		return new QM_Data_DB_Components();
 	}
 

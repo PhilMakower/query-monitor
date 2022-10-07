@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -11,7 +11,7 @@ class QM_Collector_Raw_Request extends QM_DataCollector {
 
 	public $id = 'raw_request';
 
-	public function get_storage() {
+	public function get_storage(): QM_Data {
 		return new QM_Data_Raw_Request();
 	}
 

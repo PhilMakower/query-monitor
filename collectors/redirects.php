@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /**
  * HTTP redirect collector.
  *
@@ -16,7 +16,7 @@ class QM_Collector_Redirects extends QM_DataCollector {
 
 	public $id = 'redirects';
 
-	public function get_storage() {
+	public function get_storage(): QM_Data {
 		return new QM_Data_Redirect();
 	}
 

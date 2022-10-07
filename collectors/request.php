@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /**
  * Request collector.
  *
@@ -16,7 +16,7 @@ class QM_Collector_Request extends QM_DataCollector {
 
 	public $id = 'request';
 
-	public function get_storage() {
+	public function get_storage(): QM_Data {
 		return new QM_Data_Request();
 	}
 

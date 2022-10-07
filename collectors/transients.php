@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /**
  * Transient storage collector.
  *
@@ -16,7 +16,7 @@ class QM_Collector_Transients extends QM_DataCollector {
 
 	public $id = 'transients';
 
-	public function get_storage() {
+	public function get_storage(): QM_Data {
 		return new QM_Data_Transients();
 	}
 
@@ -83,7 +83,7 @@ class QM_Collector_Transients extends QM_DataCollector {
 			'_transient_',
 		), '', $transient );
 
-		$size = strlen( maybe_serialize( $value ) );
+		$size = strlen( (string) maybe_serialize( $value ) );
 
 		$this->data->trans[] = array(
 			'name' => $name,

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 /**
  * Template conditionals collector.
  *
@@ -16,7 +16,7 @@ class QM_Collector_Conditionals extends QM_DataCollector {
 
 	public $id = 'conditionals';
 
-	public function get_storage() {
+	public function get_storage(): QM_Data {
 		return new QM_Data_Conditionals();
 	}
 
